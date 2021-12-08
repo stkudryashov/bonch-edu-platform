@@ -1,0 +1,57 @@
+<!-- Sidebar Widgets Column -->
+<div class="col-md-4">
+    {% if request.user.is_authenticated %}
+        <!-- Categories Widget -->
+        <div class="card my-4">
+            <h5 class="card-header">Мои курсы</h5>
+            <div class="card-body">
+                <ul class="list-group mt-3">
+                    <a href="{% url 'backend' %}#nav" class="list-group-item list-group-item-action">Backend разработка</a>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Teacher Widget -->
+    {% if request.user.is_staff and not request.user.is_superuser %}
+        <div class="card my-4">
+            <h5 class="card-header">Уроки</h5>
+            <div class="card-body">
+                <ul class="list-group mt-3">
+                    <a href="{% url 'add-lesson' %}#nav" class="list-group-item list-group-item-action">Создать урок</a>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Admin Widget -->
+    {% if request.user.is_superuser %}
+        <div class="card my-4">
+            <h5 class="card-header">Модерация</h5>
+            <div class="card-body">
+                <ul class="list-group mt-3">
+                    <a href="{% url 'approval' %}#nav" class="list-group-item list-group-item-action">На проверке</a>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Start Widget -->
+    {% if not request.user.is_authenticated %}
+    <div class="card my-4">
+        <h5 class="card-header">Добро пожаловать</h5>
+        <div class="card-body mt-3" align="justify">
+            Для обучения на платформе необходимо войти в свой аккаунт или зарегистрироваться.
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- About Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">Идем к цели</h5>
+        <div class="card-body mt-3" align="justify">
+            Главной целью образовательной платформы является подготовка высококвалифицированных кадров
+            для их будущего трудоустройства в компании-партнеры.
+        </div>
+    </div>
+</div>

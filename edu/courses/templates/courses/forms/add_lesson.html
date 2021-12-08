@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if request.user.is_authenticated %}
+        {{ block.super }} - написать
+    {% else %}
+        {{ block.super }} - нет прав
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+            <div class="col-md-8">
+                <a id="nav" class="anchor"></a>
+                <a id="help"><h1 class="my-4">Создать урок</h1></a>
+                <div class="card mb-4">
+                    <div class="card-header">Текст урока</div>
+                    <div class="card-body mt-3">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <p>
+                                <button type="submit" class="btn btn-primary float-end">Отправить</button>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    {% else %}
+        {% include 'inclusions/permissions.html' %}
+    {% endif %}
+{% endblock %}
